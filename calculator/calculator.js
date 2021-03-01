@@ -48,9 +48,14 @@ function update() {
 // that always has 2 decimal places.
 function calculateMonthlyPayment(values) {
     console.log('run calculateMonthlyPayment');
+    if (values["rate"] === 0) {
+        return values["amount"] / values["years"] / 12;
+    } else if (values["years"] === 0) {
+        return values["amount"];
+    }
     const monthlyPay = (values["amount"] * values["rate"] / 12) / (1 - (Math.pow(1 + values["rate"] / 12, -12 * values["years"])));
-    // return Math.round(monthlyPay * 100) / 100;
-    return monthlyPay;
+    return Math.round(monthlyPay * 100) / 100;
+    // return monthlyPay;
 }
 
 // Given a string representing the monthly payment value,
