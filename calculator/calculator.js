@@ -10,6 +10,8 @@ window.addEventListener('DOMContentLoaded', function() {
 });
 
 function getCurrentUIValues() {
+    console.log('run getCurrentUIValues');
+
     return {
         amount: +(document.getElementById("loan-amount").value),
         years: +(document.getElementById("loan-years").value),
@@ -21,30 +23,40 @@ function getCurrentUIValues() {
 // Put some default values in the inputs
 // Call a function to calculate the current monthly payment
 function setupIntialValues() {
-    let inputs = getCurrentUIValues;
+    console.log('run setupInitialValues');
+
+    let inputs = {
+        amount: 0,
+        years: 0,
+        rate: 0,
+    };
     // calculateMonthlyPayment();
 }
 
 // Get the current values from the UI
 // Update the monthly payment
 function update() {
-    inputs = getCurrentUIValues;
-    calculateMonthlyPayment(inputs);
-    updateMonthly;
+    console.log('run update');
+
+    inputs = getCurrentUIValues();
+    updateMonthly(calculateMonthlyPayment(inputs));
+    // updateMonthly;
 }
 
 // Given an object of values (a value has amount, years and rate ),
 // calculate the monthly payment.  The output should be a string
 // that always has 2 decimal places.
 function calculateMonthlyPayment(values) {
-    const monthlyPay = values["amount"] * values["rate"] / (1 - ((1 + values["rate"]) ^ (-1 * values["years"])));
-    return Math.round(monthlyPay * 100) / 100;
+    console.log('run calculateMonthlyPayment');
+    const monthlyPay = (values["amount"] * values["rate"] / 12) / (1 - (Math.pow(1 + values["rate"] / 12, -12 * values["years"])));
+    // return Math.round(monthlyPay * 100) / 100;
+    return monthlyPay;
 }
 
 // Given a string representing the monthly payment value,
 // update the UI to show the value.
 function updateMonthly(monthly) {
-    const payment = document.createElement('span');
-    payment.innerText = calculateMonthlyPayment;
-    document.querySelector('#monthly-payment').append(payment);
+    console.log('run updateMonthly');
+    const payment = document.querySelector('#monthly-payment');
+    payment.innerText = monthly;
 }
