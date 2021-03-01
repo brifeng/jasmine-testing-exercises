@@ -47,13 +47,12 @@ function update() {
 // calculate the monthly payment.  The output should be a string
 // that always has 2 decimal places.
 function calculateMonthlyPayment(values) {
-    console.log('run calculateMonthlyPayment');
-    if (values["rate"] === 0) {
-        return values["amount"] / values["years"] / 12;
-    } else if (values["years"] === 0) {
-        return values["amount"];
+    let monthlyPay = (values["amount"] * values["rate"] / 12) / (1 - (Math.pow(1 + values["rate"] / 12, -12 * values["years"])));
+    if (values["years"] === 0) {
+        monthlyPay = values["amount"];
+    } else if (values["rate"] === 0) {
+        monthlyPay = values["amount"] / values["years"] / 12;
     }
-    const monthlyPay = (values["amount"] * values["rate"] / 12) / (1 - (Math.pow(1 + values["rate"] / 12, -12 * values["years"])));
     return Math.round(monthlyPay * 100) / 100;
     // return monthlyPay;
 }
@@ -63,5 +62,5 @@ function calculateMonthlyPayment(values) {
 function updateMonthly(monthly) {
     console.log('run updateMonthly');
     const payment = document.querySelector('#monthly-payment');
-    payment.innerText = monthly;
+    payment.innerText = `$${monthly}`;
 }
