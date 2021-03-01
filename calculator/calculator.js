@@ -10,7 +10,7 @@ window.addEventListener('DOMContentLoaded', function() {
 });
 
 function getCurrentUIValues() {
-    console.log('run getCurrentUIValues');
+    // console.log('run getCurrentUIValues');
 
     return {
         amount: +(document.getElementById("loan-amount").value),
@@ -23,7 +23,7 @@ function getCurrentUIValues() {
 // Put some default values in the inputs
 // Call a function to calculate the current monthly payment
 function setupIntialValues() {
-    console.log('run setupInitialValues');
+    // console.log('run setupInitialValues');
 
     let inputs = {
         amount: 0,
@@ -36,7 +36,7 @@ function setupIntialValues() {
 // Get the current values from the UI
 // Update the monthly payment
 function update() {
-    console.log('run update');
+    // console.log('run update');
 
     inputs = getCurrentUIValues();
     updateMonthly(calculateMonthlyPayment(inputs));
@@ -60,7 +60,7 @@ function calculateMonthlyPayment(values) {
 // Given a string representing the monthly payment value,
 // update the UI to show the value.
 function updateMonthly(monthly) {
-    console.log('run updateMonthly');
+    // console.log('run updateMonthly');
     const payment = document.querySelector('#monthly-payment');
     payment.innerText = `$${monthly}`;
 }
