@@ -20,17 +20,31 @@ function getCurrentUIValues() {
 // Get the inputs from the DOM.
 // Put some default values in the inputs
 // Call a function to calculate the current monthly payment
-function setupIntialValues() {}
+function setupIntialValues() {
+    let inputs = getCurrentUIValues;
+    // calculateMonthlyPayment();
+}
 
 // Get the current values from the UI
 // Update the monthly payment
-function update() {}
+function update() {
+    inputs = getCurrentUIValues;
+    calculateMonthlyPayment(inputs);
+    updateMonthly;
+}
 
 // Given an object of values (a value has amount, years and rate ),
 // calculate the monthly payment.  The output should be a string
 // that always has 2 decimal places.
-function calculateMonthlyPayment(values) {}
+function calculateMonthlyPayment(values) {
+    const monthlyPay = values["amount"] * values["rate"] / (1 - ((1 + values["rate"]) ^ (-1 * values["years"])));
+    return Math.round(monthlyPay * 100) / 100;
+}
 
 // Given a string representing the monthly payment value,
 // update the UI to show the value.
-function updateMonthly(monthly) {}
+function updateMonthly(monthly) {
+    const payment = document.createElement('span');
+    payment.innerText = calculateMonthlyPayment;
+    document.querySelector('#monthly-payment').append(payment);
+}
