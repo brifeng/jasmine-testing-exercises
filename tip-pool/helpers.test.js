@@ -45,3 +45,45 @@ describe('appendTd tests', function() {
         expect(newTr.innerText).toBe('100');
     })
 })
+
+describe('appendDeleteBtn() tests', function() {
+    // beforeEach(function() {
+    //     let newTr = document.createElement('tr');
+    //     appendDeleteBtn(newTr);
+    // })
+    it('should create a new element representing a delete button, which is an \'X\'', function() {
+        let newTr = document.createElement('tr');
+        appendDeleteBtn(newTr);
+        expect(newTr.lastElementChild).toBeDefined();
+        expect(newTr.lastElementChild.innerText).toBe('X');
+    })
+    it('should add an event listener', function() { // only works in browser
+        // expect(getEventListeners(newTr.lastElementChild)).not.toEqual({}); 
+    })
+    it('should delete server row if clicked', function() {
+        // before code
+        serverNameInput.value = 'Charlie';
+        submitServerInfo();
+
+        // simulate click event
+        delete allServers['server1'];
+        updateServerTable();
+
+        expect(allServers['server1']).not.toBeDefined();
+    })
+    it('should delete payment row if clicked', function() {
+        // before code
+        billAmtInput.value = 100;
+        tipAmtInput.value = 50;
+        submitPaymentInfo();
+        // appendPaymentTable(createCurPayment());
+
+        // simulate click event
+        delete allPayments['payment1'];
+        document.querySelector('#payment1').remove();
+        updateServerTable();
+        updateSummary();
+
+        expect(allPayments['payment1']).not.toBeDefined();
+    })
+})

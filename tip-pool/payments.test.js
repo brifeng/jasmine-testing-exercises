@@ -17,6 +17,7 @@ describe("submitPaymentInfo test (with setup and tear-down)", function() {
     afterEach(function() {
         // teardown logic
         allPayments = {};
+        paymentId--;
         // while (paymentTbody.firstChild()) {
         paymentTbody.removeChild(paymentTbody.firstElementChild);
         // }
@@ -114,7 +115,7 @@ describe('updateSummary() tests', function() {
         expect(summaryTds[1].innerHTML).toEqual('$65');
         expect(summaryTds[2].innerHTML).toEqual('18%');
 
-
+        paymentId--;
         paymentTbody.removeChild(paymentTbody.firstElementChild); // remove one payment
         // remove second payment in afterEach()
     })
@@ -124,6 +125,7 @@ describe('updateSummary() tests', function() {
         // clear payment info
         paymentTbody.removeChild(paymentTbody.firstElementChild);
         allPayments = {};
+        paymentId--;
         summaryTds[0].innerHTML = '';
         summaryTds[1].innerHTML = '';
         summaryTds[2].innerHTML = '';
