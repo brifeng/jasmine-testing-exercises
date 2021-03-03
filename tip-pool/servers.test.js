@@ -1,9 +1,3 @@
-// !!!!!!!!!!
-// sometimes these errors appear, sometimes both, one, or none?!
-// https://imgur.com/DXjHScL
-// not always, might need to be refreshed multiple times
-// !!!!!!!!!!
-
 describe("Servers test (with setup and tear-down)", function() {
     // beforeEach(function() {
     //     // initialization logic
