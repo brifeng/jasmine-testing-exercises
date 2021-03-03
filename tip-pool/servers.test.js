@@ -1,33 +1,50 @@
+// !!!!!!!!!!
+// sometimes these errors appear, sometimes both, one, or none?!
+// https://imgur.com/DXjHScL
+// not always, might need to be refreshed multiple times
+// !!!!!!!!!!
+
 describe("Servers test (with setup and tear-down)", function() {
-    beforeEach(function() {
-        // initialization logic
-        serverNameInput.value = 'Alice';
-    });
+    // beforeEach(function() {
+    //     // initialization logic
+    // });
 
     it('should add a new server to allServers on submitServerInfo()', function() {
+        serverNameInput.value = 'Alice';
         submitServerInfo();
 
         expect(Object.keys(allServers).length).toEqual(1);
         expect(allServers['server' + serverId].serverName).toEqual('Alice');
-    });
+        expect(serverNameInput.value).toEqual('');
 
-    afterEach(function() {
-        // teardown logic
         allServers = {};
-        while (serverTbody.hasChildNodes()) {
-            serverTbody.removeChild(serverTbody.firstElementChild);
-        }
+        serverId--;
+        serverTbody.removeChild(serverTbody.firstElementChild);
     });
+    it('should do nothing/leave allServers array empty if no server name entered', function() {
+        submitServerInfo();
+        expect(allServers).toEqual({});
+    })
+
+    // afterEach(function() {
+    //     // teardown logic
+    // });
 });
 
-it('should test submitServerInfo()', function() {
+describe('updateServerTable() tests', function() {
+    it('should fill new tr element with td elements', function() {
+        serverNameInput.value = 'Bob';
+        // allServers['server1'] = { 'Bob' }; // this doesn't work??
+        // ^this follows the same syntax in function submitServerInfo()
+        // allServers['server' + serverId] = { serverName };
+        submitServerInfo();
 
-});
+        expect(serverTbody.hasChildNodes()).toBeTruthy();
+        expect(serverTbody.firstElementChild.hasChildNodes()).toBeTruthy();
+        expect(Object.keys(allServers).length).toEqual(1);
 
-it('should test updateSeverTable()', function() {
-    updateServerTable();
-    // expect(curServer).toEqual('Alice');
-    // expect(Object.keys(newTr)).toBeDefined();
-    // expect(tipAverage).tobeGreaterThanOrEqual(0);
-    expect(serverTbody.hasChildNodes).toBeTruthy();
-});
+        allServers = {};
+        serverId--;
+        serverTbody.removeChild(serverTbody.firstElementChild);
+    });
+})
