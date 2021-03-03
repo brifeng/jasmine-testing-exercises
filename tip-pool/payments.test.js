@@ -133,6 +133,8 @@ describe('updateSummary() tests', function() {
 
 it('should display a tip percentage of 0 in shift summary if there are no payments made', function() {
     updateSummary();
+    expect(summaryTds[0].innerText).toEqual('$0');
+    expect(summaryTds[1].innerText).toEqual('$0');
     expect(summaryTds[2].innerText).toEqual('0%');
     summaryTds[0].innerHTML = '';
     summaryTds[1].innerHTML = '';
